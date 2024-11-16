@@ -1,0 +1,90 @@
+
+<index>
+<html lang="pt-br">
+<header>
+    <meta charset="UTF-8">
+    <title>web radio</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="stylesheet" rel="main.css">
+</head>
+
+<body>
+    <head>
+
+    <h1>Canal ao vivo</h1>
+
+</head>
+<main>
+    <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Dolore rem cum voluptatem sequi laboriosam, soluta illo amet autem, dolores officia unde a omnis distinctio cupiditate, vel delectus ab veniam corporis!</p>
+    
+</main>
+    <header>
+        <h1>Ministerio Resgatando Almas</h1>
+    </header>
+    <audio id="audioPlayer" controls></audio>
+    <button id="startButton">Start Recording</button>
+    <button id="stopButton" disabled>Stop Recording</button>
+
+<hr>
+   
+
+    <script>
+
+        const audioPlayer = document.getElementById('audioPlayer');
+
+        const startButton = document.getElementById('startButton');
+
+        const stopButton = document.getElementById('stopButton');
+
+        startButton.addEventListener('click', () => {
+
+            navigator.mediaDevices.getUserMedia({ audio: true })
+
+                .then(stream => {
+
+                    audioPlayer.srcObject = stream;
+
+                    audioPlayer.play();
+
+                    startButton.disabled = true;
+
+                    stopButton.disabled = false;
+
+                })
+
+                .catch(err => console.error('Error accessing microphone:', err));
+
+        });
+
+
+
+        stopButton.addEventListener('click', () => {
+
+            const stream = audioPlayer.srcObject;
+
+            if (stream) {
+
+                stream.getTracks().forEach(track => track.stop());
+
+            }
+
+            startButton.disabled = false;
+
+            stopButton.disabled = true;
+
+        });
+
+    </script>
+
+
+    <h1>pagina de mp3 </h1>
+
+</head>
+<body>
+<audio controls>
+<source src=""type="audio/mp3">
+source src="" type="audio/mpeg">
+</audio>
+
+</body>
+</html>
